@@ -6,7 +6,7 @@ import numpy as np
 from sklearn.base import BaseEstimator, ClassifierMixin
 from sklearn import svm
 from sklearn.utils import check_X_y
-from base  import BaseSVMPlus
+from svmplus.base import BaseSVMPlus
 
 
 class LibSVMPlus(six.with_metaclass(ABCMeta, BaseSVMPlus, BaseEstimator)):
