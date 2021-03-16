@@ -20,7 +20,7 @@ from sklearn.base import BaseEstimator
 from cvxopt import matrix, solvers
 from svmplus.base import BaseSVMPlus
 from sklearn.utils import check_X_y
-
+import math
 
 class QPSVMPlus(six.with_metaclass(ABCMeta, BaseSVMPlus, BaseEstimator)):
     def __init__(self, C=1, gamma=1,
@@ -198,8 +198,13 @@ class QPSVMPlus(six.with_metaclass(ABCMeta, BaseSVMPlus, BaseEstimator)):
 
         return y_predict
 
+    def sigmoid(self,a):
+        e = math.e
+        s = 1 / (1 + e**-a)
+        return s
 
     def decision_function(self, X):
         return self.project(X)
 
-
+    def predict_proba(self, X):
+        return np.array([[self.sigmoid(x) for x in y_predict_decision_] for y_predict_decision_ in self.decision_function(X)])
